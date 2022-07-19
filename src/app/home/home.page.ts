@@ -11,6 +11,7 @@ export class HomePage {
   currentDate: string;
   myTask = '';
   addTask: boolean;
+  tasks = [];
 
   constructor(public afDB: AngularFireDatabase) {
 
@@ -23,6 +24,7 @@ export class HomePage {
     };
 
     this.currentDate = new Date().toLocaleTimeString('fr-FR', timeformat);
+    this.getTasks();
   }
   addTaskToFirebase() {
     this.afDB.list('Tasks/').push({
@@ -35,4 +37,25 @@ export class HomePage {
     this.addTask = !this.addTask;
     this.myTask = '';
   }
+  getTasks() {
+    this.afDB.list('Tasks/').snapshotChanges().subscribe(actions => {
+      this.tasks = [];
+      actions.forEach(action => {
+        this.tasks.push({
+          key: action.key,
+          text: action.payload.exportVal().text,
+          hour: action.payload.exportVal().date.substring(11, 16),
+          checked: action.payload.exportVal().checked
+        });
+      });
+    });
+  };
+  changeCheckState(ev: any) {
+    this.afDB.object('Tasks/' + ev.key + '/checked/').set(ev.checked);
+  };
+
+  deleteTask(task: any) {
+    this.afDB.list('Tasks/').remove(task.key);
+  }
+
 }
