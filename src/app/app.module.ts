@@ -14,12 +14,13 @@ import { initializeApp } from "firebase/app";
 export const firebaseConfig = {
   apiKey: "AIzaSyCfLmi0L9f7y2OEBNzCXNWFzspbI-sK3vU",
   authDomain: "test-firebase-efed8.firebaseapp.com",
+  databaseURL: "https://test-firebase-efed8-default-rtdb.europe-west1.firebasedatabase.app",
   projectId: "test-firebase-efed8",
   storageBucket: "test-firebase-efed8.appspot.com",
   messagingSenderId: "510078060782",
   appId: "1:510078060782:web:38b6662fce1eb978140bff"
 };
-
+const app = initializeApp(firebaseConfig);
 
 // const app = initializeApp(firebaseConfig);
 @NgModule({
