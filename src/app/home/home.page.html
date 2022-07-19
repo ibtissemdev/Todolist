@@ -1,20 +1,30 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
+  <ion-toolbar color="primary">
+    <ion-title slot="start">
+      Ionic Todolist
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
+  <!-- <ion-header collapse="condense">
+    <ion-toolbar >
       <ion-title size="large">Blank</ion-title>
     </ion-toolbar>
-  </ion-header>
+  </ion-header>-->
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <div id="container" class="bg-img">
+    <h1><b>Aujourd'hui</b></h1>
+    <h3>{{ currentDate }}</h3>
+    <ion-card>
+      <ion-item lines="full">
+        <ion-input [(ngModel)]="myTask" placeholder="Entrer une tâche"></ion-input>
+        <ion-button (click)="addTaskToFirebase()" shape="round" slot="end">
+          <ion-icon slot="icon-only" name="add"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </ion-card>
   </div>
+
+
 </ion-content>
